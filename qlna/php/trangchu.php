@@ -83,6 +83,18 @@ if ($result && $result->num_rows > 0) {
 }
 $stmt_recipes->close();
 $conn->close();
+
+// Ánh xạ tên danh mục sang tên file
+$category_file_map = [
+    'Lẩu' => 'danhmuc/cong_thuc_lau.php',
+    'Nướng' => 'danhmuc/cong_thuc_nuong.php',
+    'Chiên' => 'danhmuc/cong_thuc_chien.php',
+    'Xào' => 'danhmuc/cong_thuc_xao.php',
+    'Kho' => 'danhmuc/cong_thuc_kho.php',
+    'Hấp' => 'danhmuc/cong_thuc_hap.php',
+    'Món chay' => 'danhmuc/cong_thuc_chay.php',
+    'Tráng miệng' => 'danhmuc/cong_thuc_trangmieng.php'
+];
 ?>
 <!DOCTYPE html>
 <html>
@@ -303,29 +315,14 @@ $conn->close();
 
     <div class="category-container">
         <?php foreach ($categories as $category): ?>
-            <a href="trangchu.php?category_id=<?php echo $category['category_id']; ?>" class="category-box">
-                <?php echo htmlspecialchars($category['name']); ?>
+            <?php
+                $category_name = htmlspecialchars($category['name']);
+                $file_name = isset($category_file_map[$category_name]) ? $category_file_map[$category_name] : 'trangchu.php';
+            ?>
+            <a href="<?php echo $file_name; ?>?category_id=<?php echo $category['category_id']; ?>" class="category-box">
+                <?php echo $category_name; ?>
             </a>
         <?php endforeach; ?>
-    </div>
-
-    <div class="main-content">
-        <h1>Công thức mới nhất</h1>
-        <div class="recipe-list">
-            <?php if (!empty($recipes)): ?>
-                <?php foreach ($recipes as $recipe): ?>
-                    <a href="#" class="recipe-card">
-                        <img src="<?php echo htmlspecialchars($recipe['image_url']); ?>" alt="<?php echo htmlspecialchars($recipe['title']); ?>">
-                        <div class="card-body">
-                            <h3><?php echo htmlspecialchars($recipe['title']); ?></h3>
-                            <p>Tác giả: <?php echo htmlspecialchars($recipe['username']); ?></p>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>Không tìm thấy công thức nào phù hợp.</p>
-            <?php endif; ?>
-        </div>
     </div>
 
     <script>
