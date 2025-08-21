@@ -28,10 +28,10 @@ $conn->close();
         .header .logo-link { height: 60px; display: flex; align-items: center; }
         .header .logo-image { height: 100%; width: auto; }
         .user-actions { font-weight: bold; }
-        .container { max-width: 900px; margin: 40px auto; padding: 20px; background-color: #FFE0B2; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        .container { max-width: 1100px; margin: 40px auto; padding: 20px; background-color: #FFE0B2; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
         h1 { text-align: center; color: #333; margin-bottom: 20px; }
-        .action-list { display: flex; justify-content: center; gap: 20px; margin-top: 30px; }
-        .action-list a { background-color: #1877f2; color: white; padding: 15px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 18px; transition: background-color 0.3s ease; }
+        .action-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 30px; }
+        .action-list a { background-color: #1877f2; color: white; padding: 18px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 18px; text-align: center; transition: background-color 0.3s ease; }
         .action-list a:hover { background-color: #166fe5; }
     </style>
 </head>
@@ -49,6 +49,7 @@ $conn->close();
         <h1>Bảng điều khiển Admin</h1>
         <div class="action-list">
             <a href="upload_recipe.php">Đăng công thức mới</a>
+            <a href="manage_recipes.php">Quản lý công thức</a>
             <a href="manage_categories.php">Quản lý danh mục</a>
             <a href="#">Quản lý người dùng</a>
         </div>
