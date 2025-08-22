@@ -29,18 +29,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category_id = $_POST['category_id'];
     $author_id = $_SESSION['user_id'];
 
-    // 1. Chèn dữ liệu vào bảng Cong_thuc_nau_an
-    $sql_recipe = "INSERT INTO Cong_thuc_nau_an (title, description, image_url, category_id, author_id, created_at) VALUES (?, ?, ?, ?, ?, NOW())";
+    // 1. Chèn dữ liệu vào bảng cong_thuc_nau_an
+    $sql_recipe = "INSERT INTO cong_thuc_nau_an (title, description, image_url, category_id, author_id, created_at) VALUES (?, ?, ?, ?, ?, NOW())";
     $stmt_recipe = $conn->prepare($sql_recipe);
     $stmt_recipe->bind_param("ssssi", $title, $description, $image_url, $category_id, $author_id);
     
     if ($stmt_recipe->execute()) {
         $new_recipe_id = $conn->insert_id; // Lấy ID của công thức vừa được tạo
 
-        // 2. Chèn từng nguyên liệu vào bảng Nguyen_lieu
+        // 2. Chèn từng nguyên liệu vào bảng nguyen_lieu
         $ingredients_array = explode("\n", $ingredients_input);
         
-        $sql_ingredient = "INSERT INTO Nguyen_lieu (recipe_id, ingredient_name) VALUES (?, ?)";
+        $sql_ingredient = "INSERT INTO nguyen_lieu (recipe_id, ingredient_name) VALUES (?, ?)";
         $stmt_ingredient = $conn->prepare($sql_ingredient);
         
         foreach ($ingredients_array as $ingredient) {
@@ -52,9 +52,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         $stmt_ingredient->close();
         
-        // 3. Chèn từng bước vào bảng Cac_buoc_nau_an
+        // 3. Chèn từng bước vào bảng cac_buoc_nau_an
         $instructions_array = explode("\n", $instructions_input);
-        $sql_step = "INSERT INTO Cac_buoc_nau_an (recipe_id, step_number, description) VALUES (?, ?, ?)";
+        $sql_step = "INSERT INTO cac_buoc_nau_an (recipe_id, step_number, description) VALUES (?, ?, ?)";
         $stmt_step = $conn->prepare($sql_step);
         
         $step_number = 1;

@@ -34,7 +34,7 @@ if (!$title || !$author_id) {
 }
 
 // Tạo câu lệnh SQL
-$sql = "INSERT INTO Cong_thuc_nau_an 
+$sql = "INSERT INTO cong_thuc_nau_an 
         (title, description, cook_time, servings, difficulty, category_id, author_id, image_url, video_url, created_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 

@@ -16,11 +16,11 @@ if ($stmt_cat->fetch()) {
 }
 $stmt_cat->close();
 
-$sql = "SELECT Cong_thuc_nau_an.recipe_id, Cong_thuc_nau_an.title, Cong_thuc_nau_an.image_url, Thong_tin_nguoi_dung.username
-        FROM Cong_thuc_nau_an
-        LEFT JOIN Thong_tin_nguoi_dung ON Cong_thuc_nau_an.author_id = Thong_tin_nguoi_dung.user_id
-        WHERE Cong_thuc_nau_an.category_id = ?
-        ORDER BY Cong_thuc_nau_an.created_at DESC";
+$sql = "SELECT cong_thuc_nau_an.recipe_id, cong_thuc_nau_an.title, cong_thuc_nau_an.image_url, thong_tin_nguoi_dung.username
+FROM cong_thuc_nau_an
+LEFT JOIN thong_tin_nguoi_dung ON cong_thuc_nau_an.author_id = thong_tin_nguoi_dung.user_id
+WHERE cong_thuc_nau_an.category_id = ?
+ORDER BY cong_thuc_nau_an.created_at DESC";
 
 $stmt_recipes = $conn->prepare($sql);
 $stmt_recipes->bind_param("i", $category_id);
@@ -156,7 +156,7 @@ $conn->close();
         <div class="recipe-list">
             <?php if (!empty($recipes)): ?>
                 <?php foreach ($recipes as $recipe): ?>
-                    <a href="#" class="recipe-card">
+                                         <a href="../chi_tiet_cong_thuc.php?recipe_id=<?php echo htmlspecialchars($recipe['recipe_id']); ?>" class="recipe-card">
                         <img src="<?php echo htmlspecialchars($recipe['image_url']); ?>" alt="<?php echo htmlspecialchars($recipe['title']); ?>">
                         <div class="card-body">
                             <h3><?php echo htmlspecialchars($recipe['title']); ?></h3>

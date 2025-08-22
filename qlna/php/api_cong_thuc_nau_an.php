@@ -17,7 +17,7 @@ $sql = "SELECT
             image_url, 
             video_url, 
             created_at 
-        FROM Cong_thuc_nau_an";
+        FROM cong_thuc_nau_an";
 
 $result = $conn->query($sql);
 
